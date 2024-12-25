@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useFireproof } from 'use-fireproof'
+import { connect } from '@fireproof/cloud'
 import { DATABASES, FocusGroup } from '../constants'
 
 export function Sidebar() {
-  const { useLiveQuery } = useFireproof(DATABASES.FOCUS_GROUPS)
+  const { useLiveQuery, database } = useFireproof(DATABASES.FOCUS_GROUPS)
   const { docs } = useLiveQuery<FocusGroup>('_id')
+
+  connect(database)
 
   return (
     <aside className="fixed h-screen w-64 border-r dark:border-gray-700 bg-white dark:bg-gray-800 flex flex-col">
